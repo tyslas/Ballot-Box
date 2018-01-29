@@ -4,8 +4,8 @@ import {
   TextInput, Button, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
-const formWidth = width * 0.6;
-const formHeight = height * 0.3;
+const formWidth = width * 0.8;
+const formHeight = height * 0.65;
 
 export default class Login extends Component {
   state = {
@@ -49,8 +49,8 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
   formContainer: {
     justifyContent: 'center',
-    margin: 20,
-    padding: 20,
+    padding: 10,
+    margin: 10,
     backgroundColor: '#3A4357',
     borderRadius: 10,
     width: formWidth,

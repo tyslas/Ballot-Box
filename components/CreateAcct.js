@@ -54,23 +54,36 @@ export default class CreateAcct extends Component {
       <View style={styles.formContainer}>
         <TextInput
          style={styles.input}
+         autoFocus
          secureTextEntry
          placeholder='personal key'
+         placeholderTextColor='white'
+         selectionColor='white'
+         underlineColorAndroid='gray'
          onChangeText={(e) => this.changeKeyHandler(e)}
          value={this.state.voterKey} />
         <TextInput
           style={styles.input}
           placeholder='email'
+          placeholderTextColor='white'
+          selectionColor='white'
+          underlineColorAndroid='gray'
           onChangeText={(e) => this.changeEmailHandler(e)}
           value={this.state.email} />
         <TextInput
           style={styles.input}
           placeholder='first name'
+          placeholderTextColor='white'
+          selectionColor='white'
+          underlineColorAndroid='gray'
           onChangeText={(e) => this.changeFirstHandler(e)}
           value={this.state.firstName} />
         <TextInput
           style={styles.input}
           placeholder='last name'
+          placeholderTextColor='white'
+          selectionColor='white'
+          underlineColorAndroid='gray'
           onChangeText={(e) => this.changeLastHandler(e)}
           value={this.state.lastName} />
         <View>
@@ -97,6 +110,7 @@ const styles = StyleSheet.create({
   input: {
     height: 30,
     margin: 5,
+    color: 'white'
   },
   button: {
     margin: 5

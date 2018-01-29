@@ -4,10 +4,10 @@ import {
   TextInput, Button, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
-const formWidth = width * 0.65;
-const formHeight = height * 0.2;
+const formWidth = width * 0.8;
+const formHeight = height * 0.65;
 
-export default class Login extends Component {
+export default class Profile extends Component {
   state = {
     voterKey: '',
     email: ''
@@ -40,7 +40,8 @@ export default class Login extends Component {
   render() {
     return (
       <View style={styles.formContainer}>
-        <TextInput
+        <Text>Voter Info component</Text>
+        {/* <TextInput
          style={styles.input}
          secureTextEntry
          placeholder='personal key'
@@ -55,7 +56,7 @@ export default class Login extends Component {
           style={styles.button}
           title='Login'
           color='gray'
-          onPress={() => this.handleLogin()} />
+          onPress={() => this.handleLogin()} /> */}
       </View>
     );
   }
@@ -65,6 +66,7 @@ const styles = StyleSheet.create({
   formContainer: {
     justifyContent: 'space-around',
     padding: 10,
+    margin: 10,
     backgroundColor: '#3A4357',
     borderRadius: 10,
     width: formWidth,
@@ -72,9 +74,9 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 30,
-    margin: 5,
   },
   button: {
-    margin: 5
+    padding: 30,
+    margin: 10
   }
 });

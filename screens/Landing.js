@@ -9,6 +9,7 @@ import Ballot from '../components/Ballot';
 import TopBar from '../components/TopBar';
 import LandingNav from '../components/LandingNav';
 import BallotNav from '../components/BallotNav';
+import Profile from '../components/Profile';
 
 const logo = require('../assets/ballotbox-logo-blue.png');
 const { width, height } = Dimensions.get('window');
@@ -105,8 +106,7 @@ export default class App extends Component {
   }
 
   handleLogout = (click) => {
-    console.log('[handleLogout]', !click);
-    this.setState({createAcct: click, ballot: !click})
+    this.setState({createAcct: click, ballot: !click, profile: !click})
   }
 
   render() {
@@ -120,6 +120,9 @@ export default class App extends Component {
             <Image
               style={styles.logo}
               source={logo} />}
+
+          {this.state.profile ? <Profile /> : null}
+
           {this.state.createAcct ? (<CreateAcct addVoter={this.addVoter} />) : null}
           {this.state.login ? (<Login getVoter={this.getVoter} />) : null}
           {this.state.ballot ? (<Ballot />) : null}
@@ -160,7 +163,6 @@ const styles = StyleSheet.create({
     height: menuHeight,
     width: width,
     backgroundColor: '#3A4357',
-    borderRadius: 10,
     justifyContent: 'center',
   },
   boxLogo: {

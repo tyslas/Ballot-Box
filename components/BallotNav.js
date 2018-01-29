@@ -19,7 +19,6 @@ export default class BallotNav extends Component {
 
   handleLogoutToggle = () => {
     let toggle = !this.state.logoutClick;
-    console.log(toggle);
     this.props.logout(toggle);
   }
 
@@ -48,7 +47,6 @@ styles = StyleSheet.create({
     height: menuHeight,
     width: width,
     backgroundColor: '#3A4357',
-    borderRadius: 10,
   },
   button: {
     width: buttonWidth,
