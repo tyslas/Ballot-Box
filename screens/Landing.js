@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, Alert, Image, Dimensions } from 'react-native';
 import firebase from 'firebase';
 import Firebase from '../components/firebase';
 
 import CreateAcct from '../components/CreateAcct';
 import Login from '../components/Login';
+import Ballot from '../components/Ballot';
+
+const logo = require('../assets/ballotbox-logo-blue.png');
+const { width, height } = Dimensions.get('window');
+const logoHeight = height * 0.2;
+const logoWidth = width * 0.65;
 
 export default class App extends Component {
   constructor() {
@@ -44,44 +50,46 @@ export default class App extends Component {
         last: data.last,
       });
       console.log(data);
-    // this.setState({createAcct: false, login: true});
+    this.setState({createAcct: false, login: true});
     this.getVoter(data);
   }
 
   getVoter = (data) => {
     console.log('[getVoter]', data);
 
-    // firebase
-    //   .database()
-    //   .ref("voters/" + data.email + data.password)
-    //   .on("value", snapshot => {
-    //     const user = snapshot.val();
-    //     console.log(user)
-    //     user !== null
-    //       ? this.setState({
-    //           loginData: user,
-    //           modalVisible: false,
-    //           buttonsloaded: false,
-    //           fontloaded: false,
-    //           console: styles.console,
-    //           secondPage: true,
-    //           welcomePage: true
-    //         })
-    //       : Alert.alert(
-    //         'Incorrect Login',
-    //         'Try Again',
-    //         [
-    //           {text: 'OK', onPress:() => console.log('ok'), style:'cancel'}
-    //         ]
-    //       );
-    //   });
+    firebase
+      .database()
+      .ref("voters/" + data.email + data.voterKey)
+      .on("value", snapshot => {
+        const voter = snapshot.val();
+        console.log('voter: ', voter)
+        voter !== null
+          ? this.setState({
+              loginData: voter,
+              createAcct: false,
+              login: false,
+              ballot: true
+            })
+          : Alert.alert(
+            'Incorrect Login',
+            'Try Again',
+            [
+              {text: 'OK', onPress:() => console.log('ok'), style:'cancel'}
+            ]
+          );
+      });
   }
 
   render() {
     return (
       <View style={styles.container}>
+        <Image
+          style={styles.logo}
+          source={logo}
+        />
         {this.state.createAcct ? (<CreateAcct addVoter={this.addVoter} />) : null}
         {this.state.login ? (<Login getVoter={this.getVoter} />) : null}
+        {this.state.ballot ? (<Ballot />) : null}
       </View>
     );
   }
@@ -92,6 +100,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: 50,
+    justifyContent: 'flex-start',
   },
+  logo: {
+    width: logoWidth,
+    height: logoHeight,
+    resizeMode: 'contain',
+  }
 });

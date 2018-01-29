@@ -37,18 +37,6 @@ export default class Login extends Component {
     console.log('[state] first name: ', this.state.email);
   }
 
-  // changeFirstHandler(fName) {
-  //   //change state to new first
-  //   this.setState({first: fName});
-  //   console.log('[state] first name: ', this.state.first);
-  // }
-  //
-  // changeLastHandler(lName) {
-  //   //change state to new last
-  //   this.setState({last: lName});
-  //   console.log('[state] last name: ', this.state.last);
-  // }
-
   render() {
     return (
       <View style={styles.formContainer}>
@@ -57,29 +45,17 @@ export default class Login extends Component {
          secureTextEntry
          placeholder='personal key'
          onChangeText={(e) => this.changeKeyHandler(e)}
-         value={this.state.voterKey}
-       />
+         value={this.state.voterKey} />
         <TextInput
           style={styles.input}
           placeholder='email'
           onChangeText={(e) => this.changeEmailHandler(e)}
           value={this.state.email} />
-        {/* <TextInput
-          style={styles.input}
-          placeholder='first name'
-          onChangeText={(e) => this.changeFirstHandler(e)}
-          value={this.state.firstName} />
-        <TextInput
-          style={styles.input}
-          placeholder='last name'
-          onChangeText={(e) => this.changeLastHandler(e)}
-          value={this.state.lastName} /> */}
         <Button
           style={styles.button}
           title='Login'
           color='gray'
           onPress={() => this.handleLogin()} />
-
       </View>
     );
   }
