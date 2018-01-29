@@ -6,11 +6,18 @@ import Firebase from '../components/firebase';
 import CreateAcct from '../components/CreateAcct';
 import Login from '../components/Login';
 import Ballot from '../components/Ballot';
+import TopBar from '../components/TopBar';
+import LandingNav from '../components/LandingNav';
+import BallotNav from '../components/BallotNav';
 
 const logo = require('../assets/ballotbox-logo-blue.png');
 const { width, height } = Dimensions.get('window');
 const logoHeight = height * 0.2;
 const logoWidth = width * 0.65;
+const boxLogo = require('../assets/ballotbox_wht_favicon.png');
+// const bLogoHeight = height * 0.04;
+// const bLogoWidth = width * 0.2;
+const menuHeight = height * 0.08;
 
 export default class App extends Component {
   constructor() {
@@ -21,8 +28,9 @@ export default class App extends Component {
     this.state = {
       loginData: null,
       createAcct: false,
-      login: true,
-      ballot: false
+      login: false,
+      ballot: true,
+      profile: false
     };
   }
 
@@ -80,16 +88,45 @@ export default class App extends Component {
       });
   }
 
+  toggleCreateAcct = (click) => {
+    this.setState({createAcct: click, login: !click});
+  }
+
+  toggleRegister = (click) => {
+    this.setState({createAcct: !click, login: click});
+  }
+
+  toggleBallot = (click) => {
+    this.setState({ballot: click, profile: !click});
+  }
+
+  toggleProfile = (click) => {
+    this.setState({ballot: !click, profile: click});
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Image
-          style={styles.logo}
-          source={logo}
-        />
-        {this.state.createAcct ? (<CreateAcct addVoter={this.addVoter} />) : null}
-        {this.state.login ? (<Login getVoter={this.getVoter} />) : null}
-        {this.state.ballot ? (<Ballot />) : null}
+        <View style={styles.main}>
+          <View style={styles.topBar}>
+            <Image source={boxLogo} />
+          </View>
+          {(this.state.ballot || this.state.profile) ? null :
+            <Image
+              style={styles.logo}
+              source={logo} />}
+          {this.state.createAcct ? (<CreateAcct addVoter={this.addVoter} />) : null}
+          {this.state.login ? (<Login getVoter={this.getVoter} />) : null}
+          {this.state.ballot ? (<Ballot />) : null}
+        </View>
+
+        {(this.state.ballot || this.state.profile) ?
+          (<BallotNav
+            toggleBallot={this.toggleBallot} toggleProfile={this.toggleProfile} />) : null}
+        {(this.state.login || this.state.createAcct) ?
+          (<LandingNav
+            toggleCreateAcct={this.toggleCreateAcct}
+            toggleRegister={this.toggleRegister}/>) : null}
       </View>
     );
   }
@@ -101,11 +138,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     marginTop: 50,
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
+  },
+  main: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   logo: {
     width: logoWidth,
     height: logoHeight,
+    resizeMode: 'contain',
+  },
+  topBar: {
+    height: menuHeight,
+    width: width,
+    backgroundColor: '#3A4357',
+    borderRadius: 10,
+    justifyContent: 'center',
+  },
+  boxLogo: {
+    marginRight: 10,
     resizeMode: 'contain',
   }
 });

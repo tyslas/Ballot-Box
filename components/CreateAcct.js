@@ -4,7 +4,7 @@ import {
   TextInput, Button, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
-const formWidth = width * 0.6;
+const formWidth = width * 0.65;
 const formHeight = height * 0.3;
 
 export default class CreateAcct extends Component {
@@ -73,11 +73,13 @@ export default class CreateAcct extends Component {
           placeholder='last name'
           onChangeText={(e) => this.changeLastHandler(e)}
           value={this.state.lastName} />
-        <Button
-          style={styles.button}
-          title='Create Account'
-          color='gray'
-          onPress={() => this.handleAddVoter()} />
+        <View>
+          <Button
+            style={styles.button}
+            title='Register'
+            color='gray'
+            onPress={() => this.handleAddVoter()} />
+        </View>
       </View>
     );
   }
@@ -85,9 +87,8 @@ export default class CreateAcct extends Component {
 
 const styles = StyleSheet.create({
   formContainer: {
-    justifyContent: 'center',
-    margin: 20,
-    padding: 20,
+    justifyContent: 'space-around',
+    padding: 10,
     backgroundColor: '#3A4357',
     borderRadius: 10,
     width: formWidth,
@@ -95,9 +96,9 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 30,
+    margin: 5,
   },
   button: {
-    padding: 30,
-    margin: 10
+    margin: 5
   }
 });
