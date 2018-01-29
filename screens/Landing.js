@@ -176,7 +176,7 @@ export default class App extends Component {
           {this.state.ballot ? (<Ballot />) : null}
         </View>
 
-        {(this.state.ballot || this.state.profile) ?
+        {(this.state.ballot || this.state.profile || this.state.info) ?
           (<BallotNav
             toggleBallot={this.toggleBallot}
             toggleProfile={this.toggleProfile}
