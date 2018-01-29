@@ -8,12 +8,19 @@ const buttonWidth = width * 0.1;
 export default class BallotNav extends Component {
   state = {
     ballotClick: false,
+    logoutClick: false,
     profileClick: false
   }
 
   handleBallotToggle = () => {
     let toggle = !this.state.profileClick;
     this.props.toggleBallot(toggle);
+  }
+
+  handleLogoutToggle = () => {
+    let toggle = !this.state.logoutClick;
+    console.log(toggle);
+    this.props.logout(toggle);
   }
 
   handleProfileToggle = () => {
@@ -25,7 +32,7 @@ export default class BallotNav extends Component {
     return (
       <View style={styles.menu}>
         <Button title='Ballot' color='gray' onPress={() => this.handleBallotToggle()} />
-        <Button title='Logout' color='gray' onPress={() => this.handleProfileToggle()} />
+        <Button title='Logout' color='gray' onPress={() => this.handleLogoutToggle()} />
         <Button title='Profile' color='gray' onPress={() => this.handleProfileToggle()} />
       </View>
     );

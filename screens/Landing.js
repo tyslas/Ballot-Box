@@ -104,6 +104,11 @@ export default class App extends Component {
     this.setState({ballot: !click, profile: click});
   }
 
+  handleLogout = (click) => {
+    console.log('[handleLogout]', !click);
+    this.setState({createAcct: click, ballot: !click})
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -122,7 +127,9 @@ export default class App extends Component {
 
         {(this.state.ballot || this.state.profile) ?
           (<BallotNav
-            toggleBallot={this.toggleBallot} toggleProfile={this.toggleProfile} />) : null}
+            toggleBallot={this.toggleBallot}
+            logout={this.handleLogout}
+            toggleProfile={this.toggleProfile} />) : null}
         {(this.state.login || this.state.createAcct) ?
           (<LandingNav
             toggleCreateAcct={this.toggleCreateAcct}
