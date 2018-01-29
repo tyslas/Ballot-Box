@@ -4,59 +4,29 @@ import {
   TextInput, Button, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
-const formWidth = width * 0.8;
-const formHeight = height * 0.65;
+const formWidth = width * 0.4;
+const formHeight = height * 0.25;
 
 export default class Profile extends Component {
-  state = {
-    voterKey: '',
-    email: ''
-  }
-
-  handleLogin = () => {
-    let email = this.state.email
-    let lowerEmail= email.replace(/[\W_]/g, '').toLowerCase()
-
-    let data = {
-      voterKey: this.state.voterKey,
-      email: lowerEmail
-    }
-    this.props.getVoter(data);
-  }
-
-  changeKeyHandler = (key) => {
-    //change state to new key
-    console.log(key);
-    this.setState({voterKey: key});
-    console.log('[state] first name: ', this.state.voterKey);
-  }
-
-  changeEmailHandler = (email) => {
-    //change state to new email
-    this.setState({email: email});
-    console.log('[state] first name: ', this.state.email);
-  }
-
   render() {
     return (
       <View style={styles.formContainer}>
-        <Text>Voter Info component</Text>
-        {/* <TextInput
-         style={styles.input}
-         secureTextEntry
-         placeholder='personal key'
-         onChangeText={(e) => this.changeKeyHandler(e)}
-         value={this.state.voterKey} />
-        <TextInput
-          style={styles.input}
-          placeholder='email'
-          onChangeText={(e) => this.changeEmailHandler(e)}
-          value={this.state.email} />
-        <Button
-          style={styles.button}
-          title='Login'
-          color='gray'
-          onPress={() => this.handleLogin()} /> */}
+        <View>
+          <Text style={styles.label}>First Name:</Text>
+          <TextInput
+            style={styles.input}
+            placeholderTextColor='white'
+            underlineColorAndroid='gray'
+            value={this.props.voter.first} />
+        </View>
+        <View>
+          <Text style={styles.label}>Last Name:</Text>
+          <TextInput
+            style={styles.input}
+            selectionColor='white'
+            underlineColorAndroid='gray'
+            value={this.props.voter.last} />
+        </View>
       </View>
     );
   }
@@ -74,9 +44,14 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 30,
+    color: 'white',
   },
   button: {
     padding: 30,
     margin: 10
+  },
+  label: {
+    fontWeight: 'bold',
+    color: 'white'
   }
 });

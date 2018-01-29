@@ -20,6 +20,13 @@ const boxLogo = require('../assets/ballotbox_wht_favicon.png');
 // const bLogoWidth = width * 0.2;
 const menuHeight = height * 0.08;
 
+const ballotTemplate = {
+  freePizza: false,
+  moreCowbell: false,
+  lessTraffic: false
+}
+
+
 export default class App extends Component {
   constructor() {
     super();
@@ -29,8 +36,9 @@ export default class App extends Component {
     this.state = {
       loginData: null,
       createAcct: false,
-      login: false,
-      ballot: true,
+      login: true,
+      ballot: false,
+      ballotData: null,
       profile: false
     };
   }
@@ -47,7 +55,6 @@ export default class App extends Component {
         ]
       );
     }
-
     // add voter to Firebase
     firebase
       .database()
@@ -57,6 +64,7 @@ export default class App extends Component {
         email: data.email,
         first: data.first,
         last: data.last,
+        ballotData: ballotTemplate
       });
       console.log(data);
     this.setState({createAcct: false, login: true});
@@ -64,20 +72,21 @@ export default class App extends Component {
   }
 
   getVoter = (data) => {
-    console.log('[getVoter]', data);
-
     firebase
       .database()
       .ref("voters/" + data.email + data.voterKey)
       .on("value", snapshot => {
         const voter = snapshot.val();
+        // const {voterKey, email, first, last} = voter;
         console.log('voter: ', voter)
         voter !== null
           ? this.setState({
               loginData: voter,
               createAcct: false,
               login: false,
-              ballot: true
+              ballot: false,
+              profile: true,
+              info: false
             })
           : Alert.alert(
             'Incorrect Login',
@@ -87,6 +96,35 @@ export default class App extends Component {
             ]
           );
       });
+    console.log('[STATE after login]', this.state.loginData);
+  }
+
+  getBallot = (data) => {
+    firebase
+      .database()
+      .ref("voters/" + data.email + data.voterKey + "ballotData/")
+      .on("value", snapshot => {
+        const voter = snapshot.val();
+        // const {voterKey, email, first, last} = voter;
+        console.log('voter: ', voter)
+        voter !== null
+          ? this.setState({
+              loginData: voter,
+              createAcct: false,
+              login: false,
+              ballot: false,
+              profile: true,
+              info: false
+            })
+          : Alert.alert(
+            'Incorrect Login',
+            'Try Again',
+            [
+              {text: 'OK', onPress:() => console.log('ok'), style:'cancel'}
+            ]
+          );
+      });
+    console.log('[STATE after login]', this.state.loginData);
   }
 
   toggleCreateAcct = (click) => {
@@ -98,30 +136,40 @@ export default class App extends Component {
   }
 
   toggleBallot = (click) => {
-    this.setState({ballot: click, profile: !click});
+    this.setState({ballot: click, profile: !click, info: !click});
   }
 
   toggleProfile = (click) => {
-    this.setState({ballot: !click, profile: click});
+    this.setState({ballot: !click, profile: click, info: !click});
+  }
+
+  toggleInfo = (click) => {
+    this.setState({ballot: !click, profile: !click, info: click});
   }
 
   handleLogout = (click) => {
-    this.setState({createAcct: click, ballot: !click, profile: !click})
+    this.setState({
+      createAcct: click,
+      ballot: !click,
+      profile: !click,
+      info: !click
+    })
   }
 
   render() {
+    console.log(this.state.loginData)
     return (
       <View style={styles.container}>
         <View style={styles.main}>
           <View style={styles.topBar}>
             <Image source={boxLogo} />
           </View>
-          {(this.state.ballot || this.state.profile) ? null :
+          {(this.state.ballot || this.state.profile || this.state.info) ? null :
             <Image
               style={styles.logo}
               source={logo} />}
 
-          {this.state.profile ? <Profile /> : null}
+          {this.state.profile ? <Profile voter={this.state.loginData} /> : null}
 
           {this.state.createAcct ? (<CreateAcct addVoter={this.addVoter} />) : null}
           {this.state.login ? (<Login getVoter={this.getVoter} />) : null}
@@ -131,8 +179,9 @@ export default class App extends Component {
         {(this.state.ballot || this.state.profile) ?
           (<BallotNav
             toggleBallot={this.toggleBallot}
-            logout={this.handleLogout}
-            toggleProfile={this.toggleProfile} />) : null}
+            toggleProfile={this.toggleProfile}
+            toggleInfo={this.toggleInfo}
+            logout={this.handleLogout} />) : null}
         {(this.state.login || this.state.createAcct) ?
           (<LandingNav
             toggleCreateAcct={this.toggleCreateAcct}

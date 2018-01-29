@@ -12,31 +12,7 @@ export default class Login extends Component {
     voterKey: '',
     email: ''
   }
-
-  // handleLogin = () => {
-  //   let email = this.state.email
-  //   let lowerEmail= email.replace(/[\W_]/g, '').toLowerCase()
-  //
-  //   let data = {
-  //     voterKey: this.state.voterKey,
-  //     email: lowerEmail
-  //   }
-  //   this.props.getVoter(data);
-  // }
-  //
-  // changeKeyHandler = (key) => {
-  //   //change state to new key
-  //   console.log(key);
-  //   this.setState({voterKey: key});
-  //   console.log('[state] first name: ', this.state.voterKey);
-  // }
-  //
-  // changeEmailHandler = (email) => {
-  //   //change state to new email
-  //   this.setState({email: email});
-  //   console.log('[state] first name: ', this.state.email);
-  // }
-
+  
   render() {
     return (
       <View style={styles.formContainer}>
