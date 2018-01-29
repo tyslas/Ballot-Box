@@ -7,26 +7,21 @@ const { width, height } = Dimensions.get('window');
 const formWidth = width * 0.6;
 const formHeight = height * 0.3;
 
-export default class CreateAcct extends Component {
+export default class Login extends Component {
   state = {
     voterKey: '',
-    email: '',
-    first: '',
-    last: '',
+    email: ''
   }
 
-  handleAddVoter = () => {
+  handleLogin = () => {
     let email = this.state.email
     let lowerEmail= email.replace(/[\W_]/g, '').toLowerCase()
 
     let data = {
       voterKey: this.state.voterKey,
-      email: lowerEmail,
-      first: this.state.first,
-      last: this.state.last
+      email: lowerEmail
     }
-
-    this.props.addVoter(data);
+    this.props.getVoter(data);
   }
 
   changeKeyHandler = (key) => {
@@ -42,17 +37,17 @@ export default class CreateAcct extends Component {
     console.log('[state] first name: ', this.state.email);
   }
 
-  changeFirstHandler(fName) {
-    //change state to new first
-    this.setState({first: fName});
-    console.log('[state] first name: ', this.state.first);
-  }
-
-  changeLastHandler(lName) {
-    //change state to new last
-    this.setState({last: lName});
-    console.log('[state] last name: ', this.state.last);
-  }
+  // changeFirstHandler(fName) {
+  //   //change state to new first
+  //   this.setState({first: fName});
+  //   console.log('[state] first name: ', this.state.first);
+  // }
+  //
+  // changeLastHandler(lName) {
+  //   //change state to new last
+  //   this.setState({last: lName});
+  //   console.log('[state] last name: ', this.state.last);
+  // }
 
   render() {
     return (
@@ -69,7 +64,7 @@ export default class CreateAcct extends Component {
           placeholder='email'
           onChangeText={(e) => this.changeEmailHandler(e)}
           value={this.state.email} />
-        <TextInput
+        {/* <TextInput
           style={styles.input}
           placeholder='first name'
           onChangeText={(e) => this.changeFirstHandler(e)}
@@ -78,12 +73,12 @@ export default class CreateAcct extends Component {
           style={styles.input}
           placeholder='last name'
           onChangeText={(e) => this.changeLastHandler(e)}
-          value={this.state.lastName} />
+          value={this.state.lastName} /> */}
         <Button
           style={styles.button}
-          title='Create Account'
+          title='Login'
           color='gray'
-          onPress={() => this.handleAddVoter()} />
+          onPress={() => this.handleLogin()} />
 
       </View>
     );

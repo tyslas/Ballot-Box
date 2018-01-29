@@ -4,6 +4,7 @@ import firebase from 'firebase';
 import Firebase from '../components/firebase';
 
 import CreateAcct from '../components/CreateAcct';
+import Login from '../components/Login';
 
 export default class App extends Component {
   constructor() {
@@ -14,7 +15,7 @@ export default class App extends Component {
     this.state = {
       loginData: null,
       createAcct: false,
-      loggedIn: false,
+      login: true,
       ballot: false
     };
   }
@@ -31,6 +32,7 @@ export default class App extends Component {
         ]
       );
     }
+
     // add voter to Firebase
     firebase
       .database()
@@ -41,16 +43,45 @@ export default class App extends Component {
         first: data.first,
         last: data.last,
       });
+      console.log(data);
+    // this.setState({createAcct: false, login: true});
+    this.getVoter(data);
   }
 
   getVoter = (data) => {
+    console.log('[getVoter]', data);
 
+    // firebase
+    //   .database()
+    //   .ref("voters/" + data.email + data.password)
+    //   .on("value", snapshot => {
+    //     const user = snapshot.val();
+    //     console.log(user)
+    //     user !== null
+    //       ? this.setState({
+    //           loginData: user,
+    //           modalVisible: false,
+    //           buttonsloaded: false,
+    //           fontloaded: false,
+    //           console: styles.console,
+    //           secondPage: true,
+    //           welcomePage: true
+    //         })
+    //       : Alert.alert(
+    //         'Incorrect Login',
+    //         'Try Again',
+    //         [
+    //           {text: 'OK', onPress:() => console.log('ok'), style:'cancel'}
+    //         ]
+    //       );
+    //   });
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <CreateAcct addVoter={this.addVoter} />
+        {this.state.createAcct ? (<CreateAcct addVoter={this.addVoter} />) : null}
+        {this.state.login ? (<Login getVoter={this.getVoter} />) : null}
       </View>
     );
   }

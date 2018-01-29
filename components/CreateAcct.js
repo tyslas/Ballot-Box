@@ -31,27 +31,22 @@ export default class CreateAcct extends Component {
 
   changeKeyHandler = (key) => {
     //change state to new key
-    console.log(key);
     this.setState({voterKey: key});
-    console.log('[state] first name: ', this.state.voterKey);
   }
 
   changeEmailHandler = (email) => {
     //change state to new email
     this.setState({email: email});
-    console.log('[state] first name: ', this.state.email);
   }
 
   changeFirstHandler(fName) {
     //change state to new first
     this.setState({first: fName});
-    console.log('[state] first name: ', this.state.first);
   }
 
   changeLastHandler(lName) {
     //change state to new last
     this.setState({last: lName});
-    console.log('[state] last name: ', this.state.last);
   }
 
   render() {
@@ -62,8 +57,7 @@ export default class CreateAcct extends Component {
          secureTextEntry
          placeholder='personal key'
          onChangeText={(e) => this.changeKeyHandler(e)}
-         value={this.state.voterKey}
-       />
+         value={this.state.voterKey} />
         <TextInput
           style={styles.input}
           placeholder='email'
@@ -84,7 +78,6 @@ export default class CreateAcct extends Component {
           title='Create Account'
           color='gray'
           onPress={() => this.handleAddVoter()} />
-
       </View>
     );
   }
