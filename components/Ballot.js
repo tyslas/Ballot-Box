@@ -3,20 +3,23 @@ import {
   Text, View, StyleSheet,
   TextInput, Button, Dimensions } from 'react-native';
 
+import ListViewSelectExample from './ListViewExample';
+
 const { width, height } = Dimensions.get('window');
 const formWidth = width * 0.8;
 const formHeight = height * 0.65;
 
-export default class Login extends Component {
+export default class Ballot extends Component {
   state = {
-    voterKey: '',
-    email: ''
+    selectedOption: true,
+    lessTraffic: false,
+    moreCowbell: true
   }
-  
+
   render() {
     return (
-      <View style={styles.formContainer}>
-        <Text>Ballot Component</Text>
+      <View>
+        <ListViewSelectExample />
       </View>
     );
   }

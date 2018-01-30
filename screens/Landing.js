@@ -10,6 +10,7 @@ import TopBar from '../components/TopBar';
 import LandingNav from '../components/LandingNav';
 import BallotNav from '../components/BallotNav';
 import Profile from '../components/Profile';
+import Info from '../components/Info';
 
 const logo = require('../assets/ballotbox-logo-blue.png');
 const { width, height } = Dimensions.get('window');
@@ -66,7 +67,6 @@ export default class App extends Component {
         last: data.last,
         ballotData: ballotTemplate
       });
-      console.log(data);
     this.setState({createAcct: false, login: true});
     this.getVoter(data);
   }
@@ -77,8 +77,6 @@ export default class App extends Component {
       .ref("voters/" + data.email + data.voterKey)
       .on("value", snapshot => {
         const voter = snapshot.val();
-        // const {voterKey, email, first, last} = voter;
-        console.log('voter: ', voter)
         voter !== null
           ? this.setState({
               loginData: voter,
@@ -96,7 +94,6 @@ export default class App extends Component {
             ]
           );
       });
-    console.log('[STATE after login]', this.state.loginData);
   }
 
   getBallot = (data) => {
@@ -105,8 +102,6 @@ export default class App extends Component {
       .ref("voters/" + data.email + data.voterKey + "ballotData/")
       .on("value", snapshot => {
         const voter = snapshot.val();
-        // const {voterKey, email, first, last} = voter;
-        console.log('voter: ', voter)
         voter !== null
           ? this.setState({
               loginData: voter,
@@ -124,7 +119,6 @@ export default class App extends Component {
             ]
           );
       });
-    console.log('[STATE after login]', this.state.loginData);
   }
 
   toggleCreateAcct = (click) => {
@@ -157,7 +151,6 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(this.state.loginData)
     return (
       <View style={styles.container}>
         <View style={styles.main}>
@@ -169,11 +162,20 @@ export default class App extends Component {
               style={styles.logo}
               source={logo} />}
 
-          {this.state.profile ? <Profile voter={this.state.loginData} /> : null}
 
-          {this.state.createAcct ? (<CreateAcct addVoter={this.addVoter} />) : null}
+          {this.state.createAcct ?
+          (<CreateAcct addVoter={this.addVoter} />) : null}
+
           {this.state.login ? (<Login getVoter={this.getVoter} />) : null}
-          {this.state.ballot ? (<Ballot />) : null}
+
+          {this.state.ballot ?
+          (<Ballot selections={this.state.loginData.ballotData} />) : null}
+
+          {this.state.profile ?
+          <Profile voter={this.state.loginData} /> : null}
+
+          {this.state.info ?
+          <Info /> : null}
         </View>
 
         {(this.state.ballot || this.state.profile || this.state.info) ?

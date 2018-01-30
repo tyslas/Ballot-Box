@@ -9,8 +9,8 @@ const formHeight = height * 0.2;
 
 export default class Login extends Component {
   state = {
-    voterKey: '',
-    email: ''
+    voterKey: '55555',
+    email: 'ty5@gschool.com'
   }
 
   handleLogin = () => {
@@ -26,15 +26,12 @@ export default class Login extends Component {
 
   changeKeyHandler = (key) => {
     //change state to new key
-    console.log(key);
     this.setState({voterKey: key});
-    console.log('[state] first name: ', this.state.voterKey);
   }
 
   changeEmailHandler = (email) => {
     //change state to new email
     this.setState({email: email});
-    console.log('[state] first name: ', this.state.email);
   }
 
   render() {
