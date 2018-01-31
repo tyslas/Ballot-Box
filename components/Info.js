@@ -1,34 +1,34 @@
 import React, { Component } from 'react';
 import {
-  Text, View, StyleSheet,
+  Text, View, StyleSheet, ScrollView,
   TextInput, Button, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 const formWidth = width * 0.85;
-const formHeight = height * 0.5;
+const formHeight = height * 0.7;
 
 export default class Info extends Component {
 
   render() {
     return (
       <View style={styles.formContainer}>
-        <Text style={styles.title}>Monthly Free Pizza!</Text>
-        <Text style={styles.bullets}>- Do you like pizza?</Text>
-        <Text style={styles.bullets}>- Would you be happy to pick up a complimentary pizza each month?</Text>
-        <Text style={styles.bullets}>- Then you should vote yes on this!</Text>
-        <Text style={styles.bullets}>- Vote no, if you don't like pizza or you don't have heart 💔</Text>
-
-        <Text>{'\n'}</Text>
-
-        <Text style={styles.title}>Less Traffic!</Text>
-        <Text style={styles.bullets}>- Do you want more infrastructure for public transportation? Then vote yes.</Text>
-        <Text style={styles.bullets}>- Do you despise all transportation technologies, including trains, busses, cars? Then vote no</Text>
-
-        <Text>{'\n'}</Text>
-
-        <Text style={styles.title}>MORE COWBELL!</Text>
-        <Text style={styles.bullets}>- Do you have an unquenchable thirst for the twang of cowbell? Then vote yes. 🐮🛎</Text>
-        <Text style={styles.bullets}>- Do you wish for all cowbells to be collected, melted down, and repurposed? Then vote no</Text>
+        <ScrollView>
+          <Text style={styles.title}>The Colorado Age Qualification for General Assembly Members Amendment is on the ballot in Colorado as a legislatively referred constitutional amendment on November 6, 2018</Text>
+          <Text>{'\n'}</Text>
+          <Text style={styles.bullets}>- A "yes" vote supports this amendment to reduce the age qualification from 25 to 21 for citizens to be members of the state House of Representatives or state Senate.</Text>
+          <Text>{'\n'}</Text>
+          <Text style={styles.bullets}>- A "no" vote opposes this amendment to reduce the age qualification from 25 to 21 for citizens to be members of the state House of Representatives or state Senate.</Text>
+          <Text>{'\n'}</Text>
+          <Text style={styles.bullets}>- Due to the passage of Amendment 71 in 2016, a 55 percent vote at the ballot box is required to pass this amendment.</Text>
+          <Text>{'\n'}</Text>
+          <Text style={styles.bullets}>- In 2008, voters rejected Referendum L, a similar amendment designed to reduce the age qualification from 25 to 21 for electors to be members of the legislature. The vote was 46.5 percent in support to 53.5 percent against.</Text>
+          <Text>{'\n'}</Text>
+          <Text style={styles.title}>Constitutional Changes</Text>
+          <Text>{'\n'}</Text>
+          <Text style={styles.bullets}>- The measure would amend Section 4 of Article V of the Colorado Constitution. The following underlined text would be added, and struck-through text would be deleted:</Text>
+          <Text>{'\n'}</Text>
+          <Text style={styles.bullets}>- No person shall be a representative or senator who shall not have attained the age of twenty-five twenty-one years, who shall not be a citizen of the United States, and who shall not for at least twelve months next preceding his or her election, have resided within the territory included in the limits of the district in which he shall be chosen.</Text>
+        </ScrollView>
       </View>
     );
   }

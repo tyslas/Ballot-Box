@@ -6,8 +6,8 @@ import {
 import CheckBox from './Checkbox';
 
 const { width, height } = Dimensions.get('window');
-const formWidth = width * 0.8;
-const formHeight = height * 0.65;
+const formWidth = width * 0.85;
+const formHeight = height * 0.6;
 
 export default class Ballot extends Component {
   state = {
@@ -18,7 +18,9 @@ export default class Ballot extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.formContainer}>
+        <Text style={styles.title}>Shall there be an amendment to the Colorado constitution concerning a reduction in the age qualification for a member of the general assembly from twenty-five years to twenty-one years?</Text>
+        <Text>{'\n'}</Text>
         <CheckBox />
       </View>
     );
@@ -41,5 +43,9 @@ const styles = StyleSheet.create({
   button: {
     padding: 30,
     margin: 10
-  }
+  },
+  title: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
 });

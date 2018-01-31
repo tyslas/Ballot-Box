@@ -91,7 +91,7 @@ export default class Checkbox extends Component {
 
 const styles = StyleSheet.create({
   checkBox: {
-    backgroundColor: '#3A4357',
+    // backgroundColor: '#3A4357',
     marginTop:30,
     height: checkBoxHeight,
     width: checkBoxWidth,

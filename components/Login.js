@@ -10,7 +10,7 @@ const formHeight = height * 0.2;
 export default class Login extends Component {
   state = {
     voterKey: '55555',
-    email: 'ty5@gschool.com'
+    email: 'ty@gschool.com'
   }
 
   handleLogin = () => {
