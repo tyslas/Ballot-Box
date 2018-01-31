@@ -3,7 +3,7 @@ import {
   Text, View, StyleSheet,
   TextInput, Button, Dimensions } from 'react-native';
 
-import ListViewSelectExample from './ListViewExample';
+import CheckBox from './Checkbox';
 
 const { width, height } = Dimensions.get('window');
 const formWidth = width * 0.8;
@@ -19,7 +19,7 @@ export default class Ballot extends Component {
   render() {
     return (
       <View>
-        <ListViewSelectExample />
+        <CheckBox />
       </View>
     );
   }

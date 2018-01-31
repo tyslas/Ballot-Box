@@ -1,0 +1,32 @@
+[
+  {
+    "path": "pizza",
+    "name": "I 🧡 pizza!",
+    "checked": false
+  },
+  {
+    "path": "no-pizza",
+    "name": "I don't have a heart",
+    "checked": true
+  },
+  {
+    "path": "transportation",
+    "name": "More infrastructure for public transportation",
+    "checked": true
+  },
+  {
+    "path": "no-transportation",
+    "name": "Get rid of all the trains, busses, and roads!",
+    "checked": false
+  },
+  {
+    "path": "cowbell",
+    "name": "I have an unquenchable thirst for cowbell!",
+    "checked": true
+  },
+  {
+    "path": "no-cowbell",
+    "name": "take your cowbell and shove it where the light don't shine",
+    "checked": false
+  }
+]

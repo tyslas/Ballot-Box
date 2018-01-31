@@ -7,6 +7,8 @@
     "lodash": "^4.17.4",
     "react": "16.2.0",
     "react-native": "^0.52.2",
+    "react-native-check-box": "^2.0.2",
+    "react-native-easy-toast": "^1.0.9",
     "react-native-list-view-select": "^1.0.4",
     "react-native-radio-buttons": "^1.0.0",
     "redux": "^3.7.2",
